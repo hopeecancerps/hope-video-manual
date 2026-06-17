@@ -31,7 +31,7 @@
 | 聯絡人 Email | wang@hospital.com.tw |
 | 聯絡人電話 | 02-1234-5678 |
 
-📧 申請信箱：**<span class="cf-email"></span>**
+📧 申請信箱：<span class="cf-email"></span>
 
 ✉️ 信件主旨（請直接複製貼上）：
 
