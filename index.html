@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOPE TV 衛教影片申請平台｜使用說明手冊</title>
+  <meta name="description" content="癌症希望基金會 HOPE TV 衛教影片申請平台 — 合作單位使用說明手冊">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    :root {
+      --hope-green: #1F8A4C;
+      --hope-green-dark: #176B3A;
+      --hope-green-pale: #EAF6EF;
+      --theme-color: #1F8A4C;
+      --ink: #2A2D32;
+      --ink-soft: #5A6068;
+      --line: #E3E8E4;
+    }
+    body { font-family: "PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,sans-serif; }
+
+    /* 側欄品牌標題 */
+    .sidebar > h1 { margin: 0 auto 6px; padding-top: 20px; }
+    .app-name-link { color: var(--hope-green) !important; font-weight: 800; }
+    .sidebar .app-sub {
+      display:block; text-align:center; font-size:12px; color:var(--ink-soft);
+      margin-bottom:14px; padding:0 20px; line-height:1.5;
+    }
+
+    /* 側欄目錄 */
+    .sidebar ul li a { color: var(--ink-soft); font-size: 14.5px; }
+    .sidebar ul li a:hover { color: var(--hope-green); }
+    .sidebar ul li.active > a { color: var(--hope-green) !important; font-weight: 700; border-right: 3px solid var(--hope-green); }
+
+    /* 內文標題 */
+    .markdown-section h1 { font-size: 28px; }
+    .markdown-section h2 {
+      color: var(--hope-green-dark); border-bottom: 2px solid var(--hope-green-pale);
+      padding-bottom: 8px; margin-top: 44px;
+    }
+    .markdown-section h3 { color: var(--ink); font-size: 18px; margin-top: 26px; }
+    .markdown-section a { color: var(--hope-green); }
+    .markdown-section strong { color: var(--hope-green-dark); }
+
+    /* 截圖 */
+    .markdown-section img {
+      border: 1px solid var(--line); border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06); margin: 14px 0;
+    }
+
+    /* 表格 */
+    .markdown-section table { display: table; width: 100%; border-collapse: collapse; }
+    .markdown-section th { background: var(--hope-green-pale); color: var(--hope-green-dark); }
+    .markdown-section tr:nth-child(2n) { background: #fafdfb; }
+
+    /* 提示框：用 blockquote 區分 tip / warn（靠 emoji 開頭） */
+    .markdown-section blockquote {
+      border-left: 4px solid var(--hope-green); background: var(--hope-green-pale);
+      border-radius: 8px; color: var(--ink); margin: 16px 0; padding: 12px 16px;
+    }
+    .markdown-section blockquote.warn { border-left-color:#E8A33D; background:#FFF6E8; }
+    .markdown-section blockquote p { margin: 0; }
+
+    /* 下載按鈕 */
+    .dl-box { padding: 16px 20px 4px; border-top: 1px solid var(--line); margin-top: 14px; }
+    .dl-btn {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      padding: 11px 14px; background: linear-gradient(135deg,var(--hope-green),#28A65C);
+      color:#fff !important; border-radius:10px; font-size:14px; font-weight:700;
+      text-decoration:none; box-shadow:0 4px 12px rgba(31,138,76,.28);
+    }
+    .dl-btn:hover { filter: brightness(1.05); }
+    .dl-hint { text-align:center; font-size:11px; color:var(--ink-soft); margin-top:7px; }
+
+    .markdown-section { max-width: 860px; }
+
+    /* 防爬蟲信箱：可選取複製、不可點擊 */
+    .cf-email {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+      color: var(--hope-green-dark); font-weight: 600;
+      user-select: all; -webkit-user-select: all; white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">載入中…</div>
+  <script>
+    window.$docsify = {
+      name: 'HOPE TV 衛教影片手冊',
+      nameLink: '#/',
+      loadSidebar: false,
+      homepage: 'README.md',
+      maxLevel: 3,        // 內文 h1-h3 自動產生右側錨點
+      subMaxLevel: 3,     // 側欄目錄展開到 h3
+      auto2top: true,
+      search: {
+        placeholder: '🔍 搜尋手冊內容…',
+        noData: '找不到結果',
+        depth: 3,
+      },
+      // 在側欄品牌下方插入副標 + 下載按鈕
+      plugins: [
+        function(hook, vm) {
+          // 每次內容渲染後，把以 ⚠️ 開頭的 blockquote 標成警告色
+          hook.doneEach(function() {
+            document.querySelectorAll('.markdown-section blockquote').forEach(function(bq) {
+              if (bq.textContent.trim().startsWith('⚠️')) bq.classList.add('warn');
+            });
+            // 防爬蟲：信箱由片段組合，明文不出現在原始碼
+            var u = 'cancer', d = ['ecancer','org','tw'].join('.');
+            var mail = u + String.fromCharCode(64) + d;
+            document.querySelectorAll('.cf-email').forEach(function(el) {
+              if (!el.textContent) el.textContent = mail;
+            });
+          });
+          hook.ready(function() {
+            var sidebar = document.querySelector('.sidebar');
+            if (!sidebar) return;
+            // 副標
+            var h1 = sidebar.querySelector('h1');
+            if (h1 && !sidebar.querySelector('.app-sub')) {
+              var sub = document.createElement('span');
+              sub.className = 'app-sub';
+              sub.textContent = '癌症希望基金會 · 合作單位專用';
+              h1.insertAdjacentElement('afterend', sub);
+            }
+            // 下載按鈕
+            if (!sidebar.querySelector('.dl-box')) {
+              var box = document.createElement('div');
+              box.className = 'dl-box';
+              box.innerHTML =
+                '<a class="dl-btn" href="HOPE_衛教影片平台_外部使用者手冊.pdf" download>📥 下載完整手冊 PDF</a>' +
+                '<div class="dl-hint">可離線閱讀、列印存檔</div>';
+              sidebar.appendChild(box);
+            }
+          });
+        }
+      ]
+    };
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+</body>
+</html>
